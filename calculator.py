@@ -20,6 +20,19 @@ def button_click(number):
     _entry.insert(0, str(current) + str(number)) # then it inserts the current number plus the nuew number from the next button pressed
     #                                            #we also make these strings
 
+def button_clear():
+    _entry.delete(0,END)
+
+def sum_button():
+    global _value #since variables don't pass from function to function I define a global variable
+    _value = _entry.get() # the value variable stores the initial entry
+    _entry.delete(0, END) # after storing the initial entry we clear the entry box
+
+def equal_button ():
+    result = float(_value) + float(_entry.get()) #converting numbers to floating point (not using integer bc I may add floating point in the future)
+    print(result)
+    _entry.delete(0, END) #deleting again the entry box, otherwise the last number will show up along with the result
+    _entry.insert(0,result)
     
 # Define buttons
 Button_0 = Button(root, text =  "0", padx = 40, command=lambda: button_click(0)) #lambda passes the number to he button
@@ -32,9 +45,9 @@ Button_6 = Button(root, text =  "6", padx = 40, command=lambda: button_click(6))
 Button_7 = Button(root, text =  "7", padx = 40, command=lambda: button_click(7))
 Button_8 = Button(root, text =  "8", padx = 40, command=lambda: button_click(8))
 Button_9 = Button(root, text =  "9", padx = 40, command=lambda: button_click(9))
-Button_equal = Button(root, text =  "=", padx = 40, command=lambda: button_click())
-Button_clear = Button(root, text =  "C", padx = 40, command=lambda: button_click())
-Button_sum = Button(root, text =  "+", padx = 40, command=lambda: button_click())
+Button_equal = Button(root, text =  "=", padx = 40, command= equal_button)
+Button_clear = Button(root, text =  "C", padx = 40, command= button_clear)
+Button_sum = Button(root, text =  "+", padx = 40, command=sum_button)
 
 
 #Put buttons on the screen (grid)
